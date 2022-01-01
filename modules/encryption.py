@@ -1,0 +1,10 @@
+from Cryptodome.Cipher import AES
+
+iv = '<unjA$?v*K>57YQb'.encode('utf8')
+
+key = 'q.&jvG,@6Jx3C%;F'.encode('utf8')
+aes = AES.new(key, AES.MODE_CBC, iv)
+
+decd = aes.decrypt(b'\x17\x95\xef\x9b\xdf\x1ckB\xb5_\xd0\x05\x83\xc3{/\xaeG\xdc\xb8\x9ex\xd3\xc9<\xef\x81\x05\xfa\xd1M\xd8\x15\x1d\x1bG\xbf\xc3-EH\\`,\x8e58\xaf\xdf\x9d\xd0\x87\x8d\xf2\xc3A\xafZ\xd3\xfb\xb4\xb0\xc9^')
+vt_plain = decd.decode("utf8")
+
