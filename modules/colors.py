@@ -12,7 +12,7 @@ class color:
    CWHITE  = '\33[37m'
 
 def banner():
-    banner = color.BOLD+color.PURPLE+'''
+    banner = color.BOLD+color.RED+'''
 \t _____    _       _               
 \t|  ___|__| |_ ___| |__   ___ _ __ 
 \t| |_ / _ \ __/ __| '_ \ / _ \ '__|
