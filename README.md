@@ -1,4 +1,9 @@
-Program that automates analysis of files for malicious content using different APIs.
+Program that automates analysis of files for malicious content using different APIs.  
+
+## Installation  
+  
+chmod +x install.sh  
+./install.sh  
 
 ## Usage  
 
@@ -11,3 +16,8 @@ required named arguments:
 &emsp;&emsp;&emsp;-f FILE,&emsp;--file&emsp;FILE&emsp;&emsp;&emsp;input a file for Analysis  
   
 Example : python3 ./fetcher -f malware.vbs  
+
+## Docker  
+  
+  Soon  
+  
