@@ -1,0 +1,3 @@
+pycryptodomex==3.12.0
+requests==2.22.0
+virustotal_api==1.1.11
