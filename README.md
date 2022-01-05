@@ -16,7 +16,10 @@ required named arguments:
 &emsp;&emsp;&emsp;-f FILE,&emsp;--file&emsp;FILE&emsp;&emsp;&emsp;input a file for Analysis  
 &emsp;&emsp;&emsp;-u URL,&emsp;--url&emsp;URL&emsp;&emsp;&emsp;input a url for Analysis  
   
-Example : python3 ./fetcher -f malware.vbs  
+Examples:  
+  
+python3 ./fetcher -f malware.vbs  
+python3 ./fetcher -u maliciouswebsite.io  
 
 ## Docker  
   
