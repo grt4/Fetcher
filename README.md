@@ -18,8 +18,8 @@ required named arguments:
   
 Examples:  
   
-python3 fetcher -f malware.vbs  
-python3 fetcher -u maliciouswebsite.io  
+fetcher.py -f malware.vbs  
+fetcher.py -u maliciouswebsite.io  
 
 ## Docker  
   
