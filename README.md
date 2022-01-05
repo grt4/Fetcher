@@ -14,7 +14,7 @@ optional arguments:
   
 required named arguments:  
 &emsp;&emsp;&emsp;-f FILE,&emsp;--file&emsp;FILE&emsp;&emsp;&emsp;input a file for Analysis  
-&emsp;&emsp;&emsp;-u URL,&emsp;--url&emsp;URL&emsp;&emsp;&emsp;input a url for Analysis  
+&emsp;&emsp;&emsp;-u URL,&emsp;--url&emsp;URL&emsp;&emsp;&emsp;&emsp;input a url for Analysis  
   
 Examples:  
   
