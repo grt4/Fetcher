@@ -1,3 +1,5 @@
 pycryptodomex
 requests
 virustotal_api
+puremagic
+androguard
