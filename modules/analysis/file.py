@@ -3,12 +3,13 @@ import os
 from datetime import datetime
 import puremagic
 import androguard
-from puremagic.main import PureError
+import magic
+
 from modules.APIs.vt import vt_call_API
 from modules.APIs.hybrid import ha_call_API
 from modules.extras.args import *
 from modules.extras.colors import *
-import magic
+
     
 # VirusTotal
 def vt():
