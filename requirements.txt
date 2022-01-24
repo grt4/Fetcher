@@ -3,4 +3,5 @@ requests
 virustotal_api
 puremagic
 androguard
-pyclamd
+yara-python
+oletools

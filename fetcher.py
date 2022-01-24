@@ -11,7 +11,7 @@ else:
 
 if args.file != None and args.url == None:
     print(color.GREEN+"[~] Running analysis on "+file.split("/")[-1]+" ...\n"+color.CWHITE)
-    from modules.analysis.file import *
+    from modules.analysis.files.generic import *
 
     #puremagic
     pm()
@@ -23,9 +23,10 @@ if args.file != None and args.url == None:
     ha()
 
 
+
 elif args.file == None and args.url != None:
     print(color.GREEN+"[~] Running analysis on "+url+" ...\n"+color.CWHITE)
-    from modules.analysis.url import *
+    from modules.analysis.urls.url import *
     # urlscan
     urlscan()
 

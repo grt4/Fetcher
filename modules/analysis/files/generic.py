@@ -5,13 +5,13 @@ import puremagic
 import androguard
 import magic
 from prettytable import PrettyTable
+import subprocess
 
 from modules.APIs.vt import vt_call_API
 from modules.APIs.hybrid import ha_call_API
 from modules.extras.args import *
 from modules.extras.colors import *
 
-    
 # VirusTotal
 def vt():
     vt_stamp = datetime.now().strftime("%Y-%m-%d}{%H:%M:%S")
@@ -100,6 +100,17 @@ def pm():
     else:
         pass
 
+    try:
+        if "Android" in uncompressed_pm_type:
+            android()
+    except:
+        pass
 
+# oletools
+
+# PE info
+
+# Android
 def android():
     pass
+
