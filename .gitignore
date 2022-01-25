@@ -1,3 +1,5 @@
-*results/*
+logs/*
 __pycache__/
 enc.py
+test.yara
+test.txt
