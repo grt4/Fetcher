@@ -15,7 +15,7 @@ optional arguments:
 required named arguments:  
 &emsp;&emsp;&emsp;-f FILE,&emsp;--file&emsp;FILE&emsp;input a file for Analysis  
 &emsp;&emsp;&emsp;-d DIRECTORY,&emsp;--directory&emsp;DIRECTORY&emsp;input a directory for Analysis (15s delay)  
-&emsp;&emsp;&emsp;-u URL,&emsp;--url&emsp;URL&emspinput a url for Analysis  
+&emsp;&emsp;&emsp;-u URL,&emsp;--url&emsp;URL&emsp;input a url for Analysis  
   
 Examples:  
   
