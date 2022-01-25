@@ -1,4 +1,4 @@
-Program that automates analysis of files for malicious content using different APIs.  
+Fetcher is a program that automates analysis of files for malicious content using static analysis techniques and famous APIs.  
 
 ## Installation  
   
