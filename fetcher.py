@@ -64,13 +64,13 @@ else:
     banner()
 
 if args.file != None and args.directory == None and args.url == None:
-    print(color.YELLOW+"[*] Running analysis on file "+color.CYAN+file.split("/")[-1]+color.GREEN+" ...\n"+color.CWHITE)
+    print(color.YELLOW+"[*] Running analysis on file "+color.CYAN+file.split("/")[-1]+color.YELLOW+" ...\n"+color.CWHITE)
     from modules.analysis.generic import *
 
     file_analysis()
 
 elif args.file == None and args.directory == None and args.url != None:
-    print(color.YELLOW+"[*] Running analysis on url "+color.CYAN+url+color.GREEN+" ...\n")
+    print(color.YELLOW+"[*] Running analysis on url "+color.CYAN+url+color.YELLOW+" ...\n")
     from modules.analysis.url import *
     # urlscan
     urlscan()
@@ -79,7 +79,7 @@ elif args.file == None and args.directory != None and args.url == None:
     i=0
     c=0
     second_iteration = False
-    print(color.YELLOW+"[*] Running analysis on directory "+color.CYAN+directory.split("/")[-2]+color.GREEN+" ...\n"+color.CWHITE)
+    print(color.YELLOW+"[*] Running analysis on directory "+color.CYAN+directory.split("/")[-2]+color.YELLOW+" ...\n"+color.CWHITE)
     from modules.analysis.generic import *
     for subdir, dirs, files in os.walk(directory):
         for file in files:
@@ -87,7 +87,7 @@ elif args.file == None and args.directory != None and args.url == None:
     for subdir, dirs, files in os.walk(directory):
         for file in files:
             file = os.path.join(subdir, file)
-            print(color.YELLOW+"[*] Running analysis on file "+color.CYAN+file.split("/")[-1]+color.GREEN+" ...\n")
+            print(color.YELLOW+"[*] Running analysis on file "+color.CYAN+file.split("/")[-1]+color.YELLOW+" ...\n")
             if c != i and second_iteration:
                 time.sleep(15)
             second_iteration = True
