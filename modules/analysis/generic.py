@@ -1,13 +1,14 @@
 import json
 import os
+import subprocess
 from datetime import datetime
+from prettytable import PrettyTable
+from textwrap import TextWrapper
 import puremagic
 import magic
-from prettytable import PrettyTable
-import subprocess
 from oletools import rtfobj
 import yara
-from textwrap import TextWrapper
+from pyaxmlparser import APK
 
 from modules.APIs.vt import vt_call_API
 from modules.APIs.hybrid import ha_call_API
@@ -40,6 +41,7 @@ def vt(mal):
         else:
             vt_verdict = color.GREEN+"potentially safe"+color.CWHITE
         vt_table.add_column("Value", [color.BLUE+str(vt_scan_date)+color.CWHITE, color.BLUE+str(vt_scan_id)+color.CWHITE, color.BLUE+str(vt_scan_md5)+color.CWHITE, color.BLUE+str(vt_scan_sha1)+color.CWHITE, color.BLUE+str(vt_scan_sha256)+color.CWHITE, color.BLUE+str(vt_total)+color.CWHITE, color.BLUE+str(vt_positives)+color.CWHITE, vt_verdict])
+        vt_table.align = 'l'
         print(vt_table)
     except:
         try:
@@ -75,6 +77,7 @@ def ha(mal):
 
         ha_table.add_column("Parameter", [color.YELLOW+"Scan date"+color.CWHITE, color.YELLOW+"Size"+color.CWHITE, color.YELLOW+"Type"+color.CWHITE, color.YELLOW+"Extension"+color.CWHITE, color.YELLOW+"Architecture"+color.CWHITE, color.YELLOW+"Threat Score"+color.CWHITE, color.YELLOW+"Verdict"+color.CWHITE])
         ha_table.add_column("Value",[color.BLUE+str(hybrid_date)+color.CWHITE, color.BLUE+str(hybrid_size)+color.CWHITE, color.BLUE+str(hybrid_type)+color.CWHITE, color.BLUE+str(hybrid_ext)+color.CWHITE, color.BLUE+str(hybrid_arch)+color.CWHITE, color.BLUE+str(hybrid_score)+color.CWHITE, hybrid_verdict])
+        ha_table.align = 'l'
         print(ha_table)
     except:
         print(color.RED+"[-] "+str(json.loads(ha_json.content)["message"])+color.CWHITE)
@@ -83,8 +86,9 @@ def ha(mal):
 
 # puremagic
 def pm(mal):
-    global uncompressed_pm_type
+    global uncompressed_pm_type, pm_mime_type
     uncompressed_pm_type = ""
+    pm_mime_type = ""
     ext = puremagic.magic_file(mal)
     pm_table = PrettyTable()
     if len(ext) != 0:
@@ -94,18 +98,25 @@ def pm(mal):
         pm_extension = ext[0][2]
         pm_name = ext[0][4]
         pm_confidence = ext[0][5]
-        uncompressed_pm_type = magic.Magic(uncompress=True).from_file(mal).replace(',','\n')
+
+        pm_tw = TextWrapper()
+        pm_tw.width = 80
+        pm_col = color.CWHITE+"\n"+color.BLUE
+        uncompressed_pm_type = magic.Magic(uncompress=True).from_file(mal)
+        upm = pm_col.join(pm_tw.wrap(str(uncompressed_pm_type)))+color.CWHITE
+
         pm_type = magic.Magic(mime=True).from_file(mal)
         pm_mime_type = str(ext[0][3])+color.CWHITE+"\n"+color.BLUE+(pm_type)
 
         pm_table.add_column("Parameter", [color.YELLOW+"Name"+color.CWHITE, color.YELLOW+"byte_match"+color.CWHITE, color.YELLOW+"offset"+color.CWHITE, color.YELLOW+"Extension"+color.CWHITE, color.YELLOW+"Type w/ compression"+color.CWHITE, color.YELLOW+"Type w/o compression"+color.CWHITE, color.YELLOW+"Confidence"+color.CWHITE])
-        pm_table.add_column("Value", [color.BLUE+str(pm_name)+color.CWHITE, color.BLUE+str(pm_byte_match)+color.CWHITE, color.BLUE+str(pm_offset)+color.CWHITE, color.BLUE+str(pm_extension)+color.CWHITE, color.BLUE+str(pm_mime_type)+color.CWHITE, color.BLUE+str(uncompressed_pm_type)+color.CWHITE, color.BLUE+str(pm_confidence)+color.CWHITE])
+        pm_table.add_column("Value", [color.BLUE+str(pm_name)+color.CWHITE, color.BLUE+str(pm_byte_match)+color.CWHITE, color.BLUE+str(pm_offset)+color.CWHITE, color.BLUE+str(pm_extension)+color.CWHITE, color.BLUE+str(pm_mime_type)+color.CWHITE, color.BLUE+upm, color.BLUE+str(pm_confidence)+color.CWHITE])
         
         os.makedirs('logs/MagicNumbers_results/', exist_ok = True)
         with open('logs/MagicNumbers_results/{'+mal.split('/')[-1]+'}{'+pm_stamp+'}.json', 'w') as f:
             f.write(pm_table.get_json_string())
             f.flush()
         print(color.PURPLE+"[~] Magic Numbers:\n"+color.CWHITE)
+        pm_table.align = 'l'
         print(pm_table)
         print("[+] Magic Numbers results saved to "+color.CYAN+color.BOLD+str(f.name)+"\n"+color.CWHITE)
 
@@ -161,7 +172,7 @@ def yara_matching(mal, plat):
         yara_stamp = datetime.now().strftime("%Y-%m-%d}{%H:%M:%S")
         yara_match_indicator += 1
         tw = TextWrapper()
-        tw.width = 20
+        tw.width = 80
         for r in yara_matches:
             yara_table.field_names = [color.YELLOW+"Offset"+color.CWHITE, color.YELLOW+"Matched String/Byte"+color.CWHITE]
             for mm in r.strings:
@@ -173,6 +184,7 @@ def yara_matching(mal, plat):
             f.write(yara_table.get_json_string())
             f.flush()
         print(color.RED+"[!] Matched YARA Rules for "+plat+":\n"+color.CWHITE)
+        yara_table.align = 'l'
         print(yara_table)
         print("[+] Yara matches for "+plat+" saved to "+color.CYAN+color.BOLD+str(f.name)+"\n"+color.CWHITE)
 
@@ -210,6 +222,7 @@ def StringAnalyzer(mal, plat):
             f.write(strings_table.get_json_string())
             f.flush()
         print(color.RED+"[!] Found matching strings for "+plat+":\n"+color.CWHITE)
+        strings_table.align = 'l'
         print(strings_table)
         print("[+] Strings matches for "+plat+" saved to "+color.CYAN+color.BOLD+str(f.name)+"\n"+color.CWHITE)
 
@@ -217,32 +230,44 @@ def StringAnalyzer(mal, plat):
         print(color.GREEN+"[+] No string matches found for "+plat+"\n"+color.CWHITE)
 
 
-# def MultiYaraScanner(mal):
-#     lib_files_indicator = 0
-#     # Configurating decompiler...
-#     conf = configparser.ConfigParser()
-#     conf.read(f"{sc0pe_path}/Systems/Android/libScanner.conf")
-#     decompiler_path = conf["Decompiler"]["decompiler"]
+def Quark_Android(mal):
+    qrk_stamp = datetime.now().strftime("%Y-%m-%d}{%H:%M:%S")
+    os.makedirs('logs/quark_engine_results/', exist_ok = True)
+    qrk_output = 'logs/quark_engine_results/{'+mal.split('/')[-1]+'}{'+qrk_stamp+'}.json'
+    print(color.PURPLE+"[~] Quark-Engine Analysis:\n"+color.CWHITE)
+    qrk_cmd = "quark -a '"+mal+"' -r modules/quark-rules/ -s -o '"+qrk_output+"'"
+    subprocess.check_output(qrk_cmd, shell=True).decode().strip()
 
-#     # Check if the decompiler exist on system
-#     if os.path.exists(decompiler_path):
-#         # Executing decompiler...
-#         print(f"{infoS} Decompiling target APK file...")
-#         os.system(f"{decompiler_path} -q -d mal {mal}")
+    qrk_table = PrettyTable()
+    qrk_table.field_names = [color.YELLOW+"Rule"+color.CWHITE, color.YELLOW+"Confidence"+color.CWHITE, color.YELLOW+"Score"+color.CWHITE, color.YELLOW+"Weight"+color.CWHITE]
+    # Opening JSON file
+    qrk_f = open(qrk_output)
+    
+    # returns JSON object as
+    qrk_data = json.load(qrk_f)
+    
+    # Iterating through the json
+    for i in qrk_data["crimes"]:
+        qrk_table.add_row([color.GREEN+str(i["crime"])+color.CWHITE, i["confidence"], i["score"], color.RED+str(i["weight"])+color.CWHITE])
+    
+    print("")
+    qrk_table.align[color.YELLOW+"Rule"+color.CWHITE] = "l"
+    print(qrk_table)
+    print("")
+    print(color.RED+"[!] Threat level: "+color.CWHITE+str(qrk_data["threat_level"])+color.CWHITE)
+    print(color.RED+"[*] Total score: "+color.CWHITE+str(qrk_data["total_score"])+"\n"+color.CWHITE)
 
-#         # Scan for library files and analyze them
-#         path = "mal/resources/"
-#         fnames = []
-#         for root, d_names, f_names in os.walk(path):
-#             for ff in f_names:
-#                 fnames.append(os.path.join(root, ff))
-#         if fnames != []:
-#             for extens in fnames:
-#                 if os.path.splitext(extens)[1] == ".so":
-#                     lib_files_indicator += 1
-#                     yara_android(mal=extens)
+    print("[+] Quark-Engine results saved to "+color.CYAN+color.BOLD+str(qrk_output)+"\n"+color.CWHITE)
 
-#         if lib_files_indicator == 0:
-#             print(f"{errorS} Not any library files found for analysis.")
-#     else:
-#         print(f"{errorS} Decompiler({green}JADX{white}) not found. Skipping...")
+def apkinfo(mal):
+    apk = APK(mal)
+    print(color.PURPLE+"[~] APK information:\n"+color.CWHITE)
+    print(color.GREEN+"[+] App name: "+color.CWHITE+apk.application+color.CWHITE)
+    print(color.GREEN+"[+] Package: "+color.CWHITE+apk.package+color.CWHITE)
+    print(color.GREEN+"[+] Version: "+color.CWHITE+apk.version_name+color.CWHITE)
+    print(color.GREEN+"[+] Version code: "+color.CWHITE+apk.version_code+color.CWHITE)
+    print(color.GREEN+"[+] Signed: "+color.CWHITE+str(apk.signed)+color.CWHITE)
+    print(color.GREEN+"[+] Signed with v2 Signatures: "+color.CWHITE+str(apk.signed_v2)+color.CWHITE)
+    print(color.GREEN+"[+] Signed with v1 Signatures: "+color.CWHITE+str(apk.signed_v1)+color.CWHITE)
+    print(color.GREEN+"[+] Signed with v3 Signatures: "+color.CWHITE+str(apk.signed_v3)+color.CWHITE)
+    print("")

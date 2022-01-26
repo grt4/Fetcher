@@ -11,9 +11,9 @@ def urlscan():
     us_json = us_call_API()
     
     if us_json["message"] == "Submission successful":
-        os.makedirs('API_results/urlscan/', exist_ok = True)
+        os.makedirs('logs/API_results/urlscan/', exist_ok = True)
         url_api = us_json["api"]
-        with open('API_results/urlscan/{'+url.replace('/', '_')+'}{'+url_stamp+'}.json', 'w') as f:
+        with open('logs/API_results/urlscan/{'+url.replace('/', '_')+'}{'+url_stamp+'}.json', 'w') as f:
             time.sleep(11)
             api2_response = requests.get(url_api)
             f.write(json.dumps(json.loads(api2_response.content), sort_keys=False, indent=4))
@@ -48,7 +48,7 @@ def urlscan():
             except:us_country = "Unavailable"
             try:us_city = json.loads(api2_response.content)["page"]["city"]
             except:us_city = "Unavailable"
-            try:us_asn_name = json.loads(api2_response.content)["data"]["requests"][0]["response"]["asn"]["name"]
+            try:us_asn_name = json.loads(api2_response.content)["page"]["asnname"]
             except:us_asn_name = "Unavailable"
             try:us_asn_reg = json.loads(api2_response.content)["data"]["requests"][0]["response"]["asn"]["registrar"]
             except:us_asn_reg = "Unavailable"

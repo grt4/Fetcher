@@ -1,7 +1,11 @@
+oletools
+prettytable==2.4.0
+puremagic
+pyaxmlparser
 pycryptodomex
+python_magic==0.4.24
 requests
 virustotal_api
-puremagic
-androguard
-yara-python
-oletools
+yara==1.7.7
+yara_python
+quark-engine==21.3.2

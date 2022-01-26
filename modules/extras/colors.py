@@ -13,13 +13,15 @@ class color:
 
 def banner():
     banner = color.BOLD+color.RED+'''
-\t _____    _       _               
-\t|  ___|__| |_ ___| |__   ___ _ __ 
-\t| |_ / _ \ __/ __| '_ \ / _ \ '__|
-\t|  _|  __/ || (__| | | |  __/ |   
-\t|_|  \___|\__\___|_| |_|\___|_|   
-                                                      
-\t    {1}by {4}Mohamed Sahbani\n \t     {1}& {4}Youness Ait Ichou{1}
+     _____    _       _               
+    |  ___|__| |_ ___| |__   ___ _ __ 
+    | |_ / _ \ __/ __| '_ \ / _ \ '__|
+    |  _|  __/ || (__| | | |  __/ |   
+    |_|  \___|\__\___|_| |_|\___|_|   
+     {2}A Malware Static Analysis tool
+
+        {1}by {4}Mohamed Sahbani   
+        {1}& {4}Youness Ait Ichou{1}
                         
-'''.format(color.PURPLE, color.CWHITE, color.GREEN, color.RED, color.BLUE, color.DARKCYAN, color.CYAN)
+'''.format(color.PURPLE, color.CWHITE, color.GREEN, color.RED, color.BLUE, color.DARKCYAN, color.CYAN, color.YELLOW)
     print(banner)

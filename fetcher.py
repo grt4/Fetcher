@@ -5,32 +5,34 @@ import time
 from modules.extras.colors import *
 from modules.extras.args import *
 
-if args.file == None and args.url == None and args.directory == None:
-    parser.error("At least a file or a url should be provided")
-
-else: 
-    banner()
-
-if args.file != None and args.directory == None and args.url == None:
-    print(color.GREEN+"[~] Running analysis on file "+color.YELLOW+file.split("/")[-1]+color.GREEN+" ...\n"+color.CWHITE)
-    from modules.analysis.generic import *
+def file_analysis():
+    import modules.analysis.generic as gen
 
     # puremagic
     pm(file)
     # oletools
     oleid(file)
-    # rtfobj
-    rtf(file)
+    
+    if "Rich Text Format" in gen.uncompressed_pm_type or "rtf" in gen.pm_mime_type:
+        # rtfobj
+        rtf(file)
+
     # VirusTotal
     vt(file)
     # HybridAnalysis
     ha(file)
 
     # android
-    import modules.analysis.generic as gen
+
     if "Android" in gen.uncompressed_pm_type:
-        print(color.PURPLE+"[~] YARA Analysis:\n"+color.CWHITE)
+        # apkinfo
+        apkinfo(file)
+
+        # quark-engine
+        Quark_Android(file)
+
         # yara android
+        print(color.PURPLE+"[~] YARA Analysis:\n"+color.CWHITE)
         yara_matching(file, 'android')
 
     else:
@@ -54,16 +56,21 @@ if args.file != None and args.directory == None and args.url == None:
         # strings os
         StringAnalyzer(file, 'macOS')
 
-    
 
-    
+if args.file == None and args.url == None and args.directory == None:
+    parser.error("At least a file or a url should be provided")
 
-    
+else: 
+    banner()
 
+if args.file != None and args.directory == None and args.url == None:
+    print(color.YELLOW+"[*] Running analysis on file "+color.CYAN+file.split("/")[-1]+color.GREEN+" ...\n"+color.CWHITE)
+    from modules.analysis.generic import *
 
+    file_analysis()
 
 elif args.file == None and args.directory == None and args.url != None:
-    print(color.GREEN+"[~] Running analysis on url "+color.YELLOW+url+color.GREEN+" ...\n")
+    print(color.YELLOW+"[*] Running analysis on url "+color.CYAN+url+color.GREEN+" ...\n")
     from modules.analysis.url import *
     # urlscan
     urlscan()
@@ -71,7 +78,8 @@ elif args.file == None and args.directory == None and args.url != None:
 elif args.file == None and args.directory != None and args.url == None:
     i=0
     c=0
-    print(color.GREEN+"[~] Running analysis on directory "+color.YELLOW+directory.split("/")[-2]+color.GREEN+" ...\n"+color.CWHITE)
+    second_iteration = False
+    print(color.YELLOW+"[*] Running analysis on directory "+color.CYAN+directory.split("/")[-2]+color.GREEN+" ...\n"+color.CWHITE)
     from modules.analysis.generic import *
     for subdir, dirs, files in os.walk(directory):
         for file in files:
@@ -79,20 +87,15 @@ elif args.file == None and args.directory != None and args.url == None:
     for subdir, dirs, files in os.walk(directory):
         for file in files:
             file = os.path.join(subdir, file)
-            print(color.GREEN+"[~] Running analysis on file "+color.YELLOW+file.split("/")[-1]+color.GREEN+" ...\n")
-            #puremagic
-            pm(file)
-            # oletools
-            oleid(file)
-            # rtfobj
-            rtf(file)
-            # VirusTotal
-            vt(file)
-            # HybridAnalysis
-            ha(file)
-            c+=1
-            if c != i:
+            print(color.YELLOW+"[*] Running analysis on file "+color.CYAN+file.split("/")[-1]+color.GREEN+" ...\n")
+            if c != i and second_iteration:
                 time.sleep(15)
+            second_iteration = True
+
+            file_analysis()
+
+            c+=1
+
     print(color.BLUE+"[+] "+str(i)+" files were analyzed "+color.CWHITE)
 
 
