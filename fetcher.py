@@ -96,7 +96,7 @@ elif args.file == None and args.directory != None and args.url == None:
 
             c+=1
 
-    print(color.BLUE+"[+] "+str(i)+" files were analyzed "+color.CWHITE)
+    print(color.BLUE+"[+] "+str(i)+" files were analyzed \n"+color.CWHITE)
 
 
-print("[+] Analysis complete")
+print(color.GREEN+"[**] Analysis complete")
