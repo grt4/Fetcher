@@ -14,6 +14,7 @@ def file_analysis():
     oleid(file)
     
     if "Rich Text Format" in gen.uncompressed_pm_type or "rtf" in gen.pm_mime_type:
+        
         # rtfobj
         rtf(file)
 
