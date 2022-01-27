@@ -1,11 +1,11 @@
 Fetcher is a program that automates analysis of files for malicious content using static analysis techniques and famous APIs.  
 
-## Installation  
+# Installation  
   
 chmod +x install.sh  
 ./install.sh  
 
-## Usage  
+# Usage  
 
 usage: fetcher.py [-h] -f FILE  
   
@@ -23,13 +23,13 @@ Examples:
 &emsp;&emsp;&emsp;fetcher.py -d directory/  
 &emsp;&emsp;&emsp;fetcher.py -u maliciouswebsite.io  
 
-## Docker  
+# Docker  
   
-# Prerequisites
+## Prerequisites
   
 Docker engine  
   
-# Usage  
+## Usage  
   
 docker pull grt5/fetcher  
   
