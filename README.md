@@ -25,5 +25,16 @@ fetcher.py -u maliciouswebsite.io
 
 ## Docker  
   
-  Soon  
+# Prerequisites
   
+Docker engine  
+  
+# usage  
+  
+docker pull grt5/fetcher  
+  
+docker run -it fetcher bash  
+  
+To Copy the malware to the container:  
+  
+docker cp file_path CONTAINER:/fetcher/DEST_PATH  

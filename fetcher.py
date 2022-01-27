@@ -100,4 +100,4 @@ elif args.file == None and args.directory != None and args.url == None:
     print(color.BLUE+"[+] "+str(i)+" files were analyzed \n"+color.CWHITE)
 
 
-print(color.GREEN+"[**] Analysis complete")
+print(color.GREEN+"[**] Analysis complete"+color.CWHITE)
