@@ -7,15 +7,17 @@ chmod +x install.sh
 
 ## Usage  
 
-usage: fetcher.py [-h] -f FILE  
-  
-optional arguments:  
-&emsp;&emsp;&emsp;-h,&emsp;--help&emsp;&emsp;&emsp;show this help message and exit  
-  
-required named arguments:  
-&emsp;&emsp;&emsp;-f FILE,&emsp;--file&emsp;FILE&emsp;input a file for Analysis  
-&emsp;&emsp;&emsp;-d DIRECTORY,&emsp;--directory&emsp;DIRECTORY&emsp;input a directory for Analysis (15s delay)  
-&emsp;&emsp;&emsp;-u URL,&emsp;--url&emsp;URL&emsp;input a url for Analysis  
+usage: fetcher.py [-h] [-f FILE] [-d DIRECTORY] [-u URL]
+
+optional arguments:
+  -h, --help            show this help message and exit
+
+required named arguments:
+  -f FILE, --file FILE  input a file for Analysis
+  -d DIRECTORY, --directory DIRECTORY
+                        input a directory for Analysis
+                        (15s delay)
+  -u URL, --url URL     input a url for Analysis 
   
 Examples:  
   
