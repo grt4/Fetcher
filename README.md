@@ -10,8 +10,7 @@ chmod +x install.sh
 usage: fetcher.py [-h] [-f FILE] [-d DIRECTORY] [-u URL]
 
 optional arguments:
-  -h, --help            show this help message and exit
-
+  -h, --help  show this help message and exit  
 required named arguments:
   -f FILE, --file FILE  input a file for Analysis
   -d DIRECTORY, --directory DIRECTORY
