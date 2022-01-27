@@ -37,4 +37,4 @@ docker run -it fetcher bash
   
 - To copy a malicious file to the container:  
   
-docker cp <file_path> <container>:/fetcher/<dest_path>  
+docker cp "file_path" "container":/fetcher/"dest_path"  
