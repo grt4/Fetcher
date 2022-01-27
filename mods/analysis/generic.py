@@ -235,7 +235,7 @@ def Quark_Android(mal):
     os.makedirs('logs/quark_engine_results/', exist_ok = True)
     qrk_output = 'logs/quark_engine_results/{'+mal.split('/')[-1]+'}{'+qrk_stamp+'}.json'
     print(color.PURPLE+"[~] Quark-Engine Analysis:\n"+color.CWHITE)
-    qrk_cmd = "quark -a '"+mal+"' -r mods/quark-rules/ -s -o '"+qrk_output+"'"
+    qrk_cmd = "quark -a '"+mal+"' -r mods/systems/android/quark-rules/ -s -o '"+qrk_output+"'"
     subprocess.check_output(qrk_cmd, shell=True).decode().strip()
 
     qrk_table = PrettyTable()
