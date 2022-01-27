@@ -31,10 +31,10 @@ Docker engine
   
 # Usage  
   
-&emsp;&emsp;&emsp;docker pull grt5/fetcher  
+docker pull grt5/fetcher  
   
-&emsp;&emsp;&emsp;docker run -it fetcher bash  
+docker run -it fetcher bash  
   
-To Copy the malware to the container:  
+&emsp;&emsp;To Copy the malware to the container:  
   
-&emsp;&emsp;&emsp;docker cp file_path CONTAINER:/fetcher/DEST_PATH  
+docker cp file_path CONTAINER:/fetcher/DEST_PATH  
