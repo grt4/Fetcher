@@ -1,11 +1,10 @@
 oletools
-prettytable==2.4.0
+prettytable
 puremagic
 pyaxmlparser
 pycryptodomex
-python_magic==0.4.24
+python-magic
 requests
 virustotal_api
-yara==1.7.7
-yara_python
+yara-python
 quark-engine==21.3.2

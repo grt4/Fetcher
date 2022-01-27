@@ -2,11 +2,11 @@
 import os
 import time
 
-from modules.extras.colors import *
-from modules.extras.args import *
+from mods.extras.colors import *
+from mods.extras.args import *
 
 def file_analysis():
-    import modules.analysis.generic as gen
+    import mods.analysis.generic as gen
 
     # puremagic
     pm(file)
@@ -65,13 +65,13 @@ else:
 
 if args.file != None and args.directory == None and args.url == None:
     print(color.YELLOW+"[*] Running analysis on file "+color.CYAN+file.split("/")[-1]+color.YELLOW+" ...\n"+color.CWHITE)
-    from modules.analysis.generic import *
+    from mods.analysis.generic import *
 
     file_analysis()
 
 elif args.file == None and args.directory == None and args.url != None:
     print(color.YELLOW+"[*] Running analysis on url "+color.CYAN+url+color.YELLOW+" ...\n")
-    from modules.analysis.url import *
+    from mods.analysis.url import *
     # urlscan
     urlscan()
 
@@ -80,7 +80,7 @@ elif args.file == None and args.directory != None and args.url == None:
     c=0
     second_iteration = False
     print(color.YELLOW+"[*] Running analysis on directory "+color.CYAN+directory.split("/")[-2]+color.YELLOW+" ...\n"+color.CWHITE)
-    from modules.analysis.generic import *
+    from mods.analysis.generic import *
     for subdir, dirs, files in os.walk(directory):
         for file in files:
             i+=1
