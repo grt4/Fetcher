@@ -7,24 +7,23 @@ chmod +x install.sh
 
 ## Usage  
 
--e <email>          Single validation check
--i <file in>        Dictionary
--b                  Brute-force 
--c [characters]     Characters set to bruteforce - Default is [a-z0-9.]
--t [interval]       Set time between two verifications - Default is 0.3s - range is [0-600]
--o [file out]       Ouput results to file
--h                  Help
+usage: fetcher.py [-h] [-f FILE] [-d DIRECTORY] [-u URL]
+required named arguments:
+-f FILE, --file FILE  input a file for Analysis 
+-d DIRECTORY, --directory DIRECTORY  input a directory for Analysis(15s delay)
+-u URL, --url URL  input a url for Analysis
+optional arguments:
+-h, --help  show this help message and exit
 
 Examples:
-Single Email verification
-    argus.py -e example@example.com [-t 0.1]
-Dictionary verification
-    argus.py -i dictionary.txt [-o results.txt] [-t 0.1]
-Brute-force verification
-    argus.py -b examp**3*5@example.com [-c 1g7.] [-o results.txt] [-t 0.1]
+Single file analysis
+    fetcher.py -f malware.vbs
+Directory analysis
+    fetcher.py -d directory/
+URL analysis
+    fetcher.py -u maliciouswebsite.io
   
 
 ## Docker  
   
   Soon  
-  
