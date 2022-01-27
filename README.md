@@ -29,12 +29,12 @@ fetcher.py -u maliciouswebsite.io
   
 Docker engine  
   
-# usage  
+# Usage  
   
-docker pull grt5/fetcher  
+&emsp;&emsp;&emsp;docker pull grt5/fetcher  
   
-docker run -it fetcher bash  
+&emsp;&emsp;&emsp;docker run -it fetcher bash  
   
 To Copy the malware to the container:  
   
-docker cp file_path CONTAINER:/fetcher/DEST_PATH  
+&emsp;&emsp;&emsp;docker cp file_path CONTAINER:/fetcher/DEST_PATH  
