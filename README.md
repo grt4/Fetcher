@@ -35,6 +35,6 @@ docker pull grt5/fetcher
   
 docker run -it fetcher bash  
   
--To copy a malicious file to the container:  
+- To copy a malicious file to the container:  
   
 docker cp file_path CONTAINER:/fetcher/DEST_PATH  
