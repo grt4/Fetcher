@@ -37,4 +37,4 @@ docker run -it fetcher bash
   
 - To copy a malicious file to the container:  
   
-docker cp <SRC_PATH> <CONTAINER>:/fetcher/<DEST_PATH>  
+docker cp <SRC_PATH> <\CONTAINER>:/fetcher/<DEST_PATH>  
