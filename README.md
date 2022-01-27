@@ -19,9 +19,9 @@ required named arguments:
   
 Examples:  
   
-fetcher.py -f malware.vbs  
-fetcher.py -d directory/  
-fetcher.py -u maliciouswebsite.io  
+&emsp;&emsp;&emsp;fetcher.py -f malware.vbs  
+&emsp;&emsp;&emsp;fetcher.py -d directory/  
+&emsp;&emsp;&emsp;fetcher.py -u maliciouswebsite.io  
 
 ## Docker  
   
@@ -35,6 +35,6 @@ docker pull grt5/fetcher
   
 docker run -it fetcher bash  
   
-&emsp;&emsp;To Copy the malware to the container:  
+- To Copy the malware to the container:  
   
 docker cp file_path CONTAINER:/fetcher/DEST_PATH  
