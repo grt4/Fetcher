@@ -33,8 +33,8 @@ Docker engine
   
 docker pull grt5/fetcher  
   
-docker run -it fetcher bash  
+docker run -it --name fetcher grt5/fetcher bash 
   
 - To copy a malicious file to the container:  
   
-docker cp {SRC_PATH} {CONTAINER}:/fetcher/{DEST_PATH}  
+docker cp {SRC_PATH} fetcher:/fetcher/
