@@ -65,7 +65,10 @@ def ha(mal):
         hybrid_size = json.loads(ha_json.content)["size"]
         hybrid_score = json.loads(ha_json.content)["threat_score"]
         hybrid_verdict = json.loads(ha_json.content)["verdict"]
-        hybrid_type = json.loads(ha_json.content)["type_short"][0]
+        try:
+            hybrid_type = json.loads(ha_json.content)["type_short"][0]
+        except TypeError:
+            hybrid_type = "null"
         try:hybrid_ext = json.loads(ha_json.content)["type_short"][1]
         except: hybrid_ext = "Unavailable"
         hybrid_arch = json.loads(ha_json.content)["architecture"]
@@ -198,7 +201,7 @@ def StringAnalyzer(mal, plat):
     strings_table = PrettyTable()
     matched_strings = []
 
-    strings_cmd = "strings "+str(mal)
+    strings_cmd = "strings "+str(f'"{mal}"')
     p_strings_cmd = subprocess.check_output(strings_cmd, shell=True).decode().strip()
 
     # Iterate over strings files
